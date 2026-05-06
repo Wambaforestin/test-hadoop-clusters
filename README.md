@@ -47,7 +47,16 @@ hadoop_resources/
         └── setup_ssh.sh               ← Configuration SSH sans mot de passe
 ```
 
----
+## Architecture de chaque partie du projet
+
+- **Partie A (exercices guidés)** : analyse de logs web (codes HTTP, pages visitées, durée)
+![Architecture Partie A](images/archi_0.png)
+
+- **Partie B (projet individuel)** : analyse de données de flotte de véhicules électriques
+![Architecture Partie B](images/archi_1.png)
+
+- **Partie C (Intégration des résultats MapReduce dans Apache Cassandra)** : stockage des résultats dans une base de données NoSQL pour requêtes rapides
+![Architecture Partie C](images/archi_2.png)
 
 ## Guide de démarrage rapide
 
