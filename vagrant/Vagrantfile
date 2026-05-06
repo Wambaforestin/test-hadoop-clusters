@@ -1,0 +1,40 @@
+# Vagrantfile — Cluster Hadoop 3 nœuds
+# Usage : vagrant up
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update -y
+    apt-get install -y openjdk-11-jdk net-tools curl wget
+    echo "192.168.56.10  hadoop-master" >> /etc/hosts
+    echo "192.168.56.11  hadoop-slave1" >> /etc/hosts
+    echo "192.168.56.12  hadoop-slave2" >> /etc/hosts
+    useradd -m -s /bin/bash hadoop
+    echo "hadoop:hadoop" | chpasswd
+    usermod -aG sudo hadoop
+    echo "hadoop ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/hadoop
+  SHELL
+
+  config.vm.define "hadoop-master" do |m|
+    m.vm.hostname = "hadoop-master"
+    m.vm.network "private_network", ip: "192.168.56.10"
+    m.vm.provider "virtualbox" do |vb|
+      vb.name = "hadoop-master"
+      vb.memory = "4096"
+      vb.cpus = 2
+    end
+  end
+
+  (1..2).each do |i|
+    config.vm.define "hadoop-slave#{i}" do |s|
+      s.vm.hostname = "hadoop-slave#{i}"
+      s.vm.network "private_network", ip: "192.168.56.1#{i}"
+      s.vm.provider "virtualbox" do |vb|
+        vb.name = "hadoop-slave#{i}"
+        vb.memory = "2048"
+        vb.cpus = 1
+      end
+    end
+  end
+end

@@ -1,0 +1,6 @@
+# workers — Liste des nœuds esclaves du cluster
+# À placer dans : $HADOOP_HOME/etc/hadoop/workers
+# Un hostname par ligne.
+# Ces nœuds exécuteront les DataNodes et NodeManagers.
+hadoop-slave1
+hadoop-slave2

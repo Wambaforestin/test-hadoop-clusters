@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  core-site.xml — Configuration générale Hadoop
+  Fichier à placer dans : $HADOOP_HOME/etc/hadoop/
+  À copier sur CHAQUE noeud du cluster.
+-->
+<configuration>
+
+    <!-- Point d'entrée du système de fichiers distribué (NameNode) -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop-master:9000</value>
+        <description>Adresse du NameNode. Tous les clients HDFS se connectent ici.</description>
+    </property>
+
+    <!-- Répertoire temporaire pour les données Hadoop -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/opt/hadoop/tmp</value>
+        <description>Répertoire de base pour les fichiers temporaires Hadoop.</description>
+    </property>
+
+</configuration>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  yarn-site.xml — Configuration du gestionnaire de ressources YARN
+  À placer dans : $HADOOP_HOME/etc/hadoop/yarn-site.xml
+  Doit être identique sur TOUS les nœuds du cluster.
+-->
+<configuration>
+
+  <!-- Hostname du ResourceManager -->
+  <property>
+    <n>yarn.resourcemanager.hostname</n>
+    <value>hadoop-master</value>
+    <description>
+      Le ResourceManager tourne sur le nœud master.
+      Il gère l'allocation des ressources pour les applications.
+    </description>
+  </property>
+
+  <!-- Services auxiliaires pour MapReduce -->
+  <property>
+    <n>yarn.nodemanager.aux-services</n>
+    <value>mapreduce_shuffle</value>
+    <description>
+      Le service shuffle est nécessaire pour que MapReduce
+      puisse transférer les données entre les phases Map et Reduce.
+    </description>
+  </property>
+
+  <!-- Mémoire allouée par YARN sur chaque NodeManager -->
+  <property>
+    <n>yarn.nodemanager.resource.memory-mb</n>
+    <value>1536</value>
+    <description>
+      Mémoire totale que YARN peut utiliser sur chaque slave (en Mo).
+      Règle : environ 80% de la RAM du nœud (slaves à 2 Go → 1536 Mo).
+      En production, ajuster en fonction de la RAM physique.
+    </description>
+  </property>
+
+  <!-- Allocation minimale de mémoire par conteneur -->
+  <property>
+    <n>yarn.scheduler.minimum-allocation-mb</n>
+    <value>256</value>
+    <description>
+      Taille minimale d'un conteneur YARN.
+      Si trop élevée, les petites tâches gaspillent de la mémoire.
+    </description>
+  </property>
+
+  <!-- Allocation maximale de mémoire par conteneur -->
+  <property>
+    <n>yarn.scheduler.maximum-allocation-mb</n>
+    <value>1536</value>
+    <description>
+      Ne peut pas dépasser yarn.nodemanager.resource.memory-mb.
+    </description>
+  </property>
+
+  <!-- Vérification mémoire physique désactivée (utile en VM) -->
+  <property>
+    <n>yarn.nodemanager.pmem-check-enabled</n>
+    <value>false</value>
+    <description>
+      Désactiver si les conteneurs se font tuer pour dépassement mémoire
+      en environnement de TP (VMs avec peu de RAM).
+    </description>
+  </property>
+
+  <!-- Vérification mémoire virtuelle désactivée (utile en VM) -->
+  <property>
+    <n>yarn.nodemanager.vmem-check-enabled</n>
+    <value>false</value>
+    <description>
+      La mémoire virtuelle dépasse souvent le seuil en VM.
+      Désactiver pour éviter les erreurs "beyond virtual memory limit".
+    </description>
+  </property>
+
+</configuration>

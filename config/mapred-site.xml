@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  mapred-site.xml — Configuration du framework MapReduce
+  À placer dans : $HADOOP_HOME/etc/hadoop/mapred-site.xml
+  Doit être identique sur TOUS les nœuds du cluster.
+-->
+<configuration>
+
+  <!-- Framework d'exécution MapReduce -->
+  <property>
+    <n>mapreduce.framework.name</n>
+    <value>yarn</value>
+    <description>
+      MapReduce s'exécute via YARN (et non en mode local).
+      C'est la configuration standard depuis Hadoop 2.x.
+    </description>
+  </property>
+
+  <!-- Classpath pour les applications MapReduce -->
+  <property>
+    <n>mapreduce.application.classpath</n>
+    <value>$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*</value>
+    <description>
+      Chemin vers les JARs nécessaires à l'exécution des jobs MapReduce.
+    </description>
+  </property>
+
+  <!-- Mémoire pour les tâches Map -->
+  <property>
+    <n>mapreduce.map.memory.mb</n>
+    <value>512</value>
+    <description>
+      Mémoire allouée à chaque conteneur Map (en Mo).
+      Doit être >= yarn.scheduler.minimum-allocation-mb
+      et <= yarn.scheduler.maximum-allocation-mb.
+      Pour le TP : 512 Mo suffit.
+    </description>
+  </property>
+
+  <!-- Mémoire pour les tâches Reduce -->
+  <property>
+    <n>mapreduce.reduce.memory.mb</n>
+    <value>1024</value>
+    <description>
+      Mémoire allouée à chaque conteneur Reduce (en Mo).
+      Les Reducers traitent plus de données → besoin de plus de mémoire.
+    </description>
+  </property>
+
+  <!-- Mémoire JVM pour le Map -->
+  <property>
+    <n>mapreduce.map.java.opts</n>
+    <value>-Xmx410m</value>
+    <description>
+      Heap JVM pour les tâches Map.
+      Règle : environ 80% de mapreduce.map.memory.mb.
+    </description>
+  </property>
+
+  <!-- Mémoire JVM pour le Reduce -->
+  <property>
+    <n>mapreduce.reduce.java.opts</n>
+    <value>-Xmx820m</value>
+    <description>
+      Heap JVM pour les tâches Reduce.
+      Règle : environ 80% de mapreduce.reduce.memory.mb.
+    </description>
+  </property>
+
+</configuration>
