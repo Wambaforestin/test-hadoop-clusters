@@ -1,9 +1,8 @@
-# Atelier Écosystème Hadoop — HDPE852
+# Atelier Écosystème Hadoop
+
 ## Ressources pour les étudiants
 
----
-
-## 📁 Contenu du dossier
+## Contenu du dossier
 
 ```
 hadoop_resources/
@@ -50,23 +49,27 @@ hadoop_resources/
 
 ---
 
-## 🚀 Guide de démarrage rapide
+## Guide de démarrage rapide
 
 ### 1. Créer les VMs
+
 ```bash
 cd vagrant/
 vagrant up
 ```
 
 ### 2. Configurer SSH (sur hadoop-master)
+
 ```bash
 chmod +x scripts/admin/setup_ssh.sh
 ./scripts/admin/setup_ssh.sh
 ```
 
 ### 3. Installer Hadoop
+
 Suivez les étapes du support de formation (Section 2).
 Copiez les fichiers du dossier `config/` dans `$HADOOP_HOME/etc/hadoop/` :
+
 ```bash
 cp config/core-site.xml $HADOOP_HOME/etc/hadoop/
 cp config/hdfs-site.xml $HADOOP_HOME/etc/hadoop/
@@ -77,6 +80,7 @@ cp config/workers $HADOOP_HOME/etc/hadoop/
 ```
 
 Ajoutez les variables d'environnement :
+
 ```bash
 cat config/hadoop_bashrc.sh >> ~/.bashrc
 source ~/.bashrc
@@ -85,6 +89,7 @@ source ~/.bashrc
 ### 4. Générer les datasets
 
 **Partie A (exercices guidés) :**
+
 ```bash
 chmod +x datasets/generate_web_logs.sh
 ./datasets/generate_web_logs.sh
@@ -93,6 +98,7 @@ hdfs dfs -put web_logs.csv /data/input/
 ```
 
 **Partie B (projet individuel) :**
+
 ```bash
 chmod +x datasets/generate_greenfleet.sh
 ./datasets/generate_greenfleet.sh
@@ -103,12 +109,14 @@ hdfs dfs -put fleet_data.csv /greenfleet/raw/
 ### 5. Lancer les jobs MapReduce
 
 **Tester en local d'abord :**
+
 ```bash
 cd scripts/mapreduce/
 cat ../../web_logs.csv | python3 mapper_status.py | sort | python3 reducer_count.py
 ```
 
 **Lancer sur le cluster :**
+
 ```bash
 chmod +x scripts/mapreduce/run_jobs_partA.sh
 cd scripts/mapreduce/
@@ -116,6 +124,7 @@ cd scripts/mapreduce/
 ```
 
 ### 6. Vérifier la santé du cluster
+
 ```bash
 chmod +x scripts/admin/health_check.sh
 ./scripts/admin/health_check.sh
@@ -125,19 +134,19 @@ chmod +x scripts/admin/health_check.sh
 
 ## 📋 Correspondance Fichiers ↔ Tâches du module
 
-| Tâche | Fichiers concernés |
-|-------|-------------------|
-| T1 — Analyse des besoins | generate_greenfleet.sh (pour estimer les volumes) |
-| T2 — Configuration cluster | Vagrantfile, config/*, setup_ssh.sh |
-| T3 — Installation composants | config/*, hadoop_bashrc.sh |
-| T4 — Gestion stockage HDFS | generate_web_logs.sh, generate_greenfleet.sh |
-| T5 — Jobs MapReduce | scripts/mapreduce/*.py, run_jobs_*.sh |
-| T6 — Surveillance/optimisation | health_check.sh |
-| T7 — Tests et démo | health_check.sh, deploy_node.sh |
+| Tâche                          | Fichiers concernés                                |
+| ------------------------------ | ------------------------------------------------- |
+| T1 — Analyse des besoins       | generate_greenfleet.sh (pour estimer les volumes) |
+| T2 — Configuration cluster     | Vagrantfile, config/*, setup_ssh.sh               |
+| T3 — Installation composants   | config/*, hadoop_bashrc.sh                        |
+| T4 — Gestion stockage HDFS     | generate_web_logs.sh, generate_greenfleet.sh      |
+| T5 — Jobs MapReduce            | scripts/mapreduce/*.py, run_jobs_*.sh             |
+| T6 — Surveillance/optimisation | health_check.sh                                   |
+| T7 — Tests et démo             | health_check.sh, deploy_node.sh                   |
 
 ---
 
-## ⚠️ Notes importantes
+## Notes importantes
 
 - **Rendre les scripts exécutables** avant de les lancer : `chmod +x script.sh`
 - **Les fichiers de config** sont commentés — lisez les descriptions XML
