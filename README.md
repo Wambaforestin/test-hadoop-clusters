@@ -132,7 +132,7 @@ chmod +x scripts/admin/health_check.sh
 
 ---
 
-## 📋 Correspondance Fichiers ↔ Tâches du module
+## Correspondance Fichiers ↔ Tâches du module
 
 | Tâche                          | Fichiers concernés                                |
 | ------------------------------ | ------------------------------------------------- |
