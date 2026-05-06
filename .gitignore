@@ -1,0 +1,21 @@
+# Hadoop binaires et data
+hadoop-3.3.6.tar.gz
+bigfile.bin
+fleet_data.csv
+web_logs.csv
+
+# Logs Hadoop
+logs/
+*.log
+*.out
+
+# Data HDFS locale
+/opt/hadoop/data/
+/opt/hadoop/tmp/
+/opt/hadoop/logs/
+
+# Fichiers temporaires
+*.bin
+*.tmp
+__pycache__/
+*.pyc

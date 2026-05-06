@@ -10,7 +10,7 @@
     <!-- Point d'entrée du système de fichiers distribué (NameNode) -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hadoop-master:9000</value>
+        <value>hdfs://localhost:9000</value>
         <description>Adresse du NameNode. Tous les clients HDFS se connectent ici.</description>
     </property>
 

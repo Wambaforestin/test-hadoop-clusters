@@ -1,0 +1,2 @@
+Hadoop permet le stockage distribué et le calcul parallèle
+HDFS réplique les données pour la tolérance aux pannes
