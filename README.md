@@ -1,10 +1,12 @@
 # Atelier Écosystème Hadoop
 
+Objectif : Mettre en place une plateforme Hadoop pour stocker et analyser les données télémétriques issues des véhicules électriques pour la startup Greenfleet. Ces données seront par la suite chargées (les résultats d'un job au choix) dans Apache Cassandra et les exploiter avec des requêtes CQL,
+
 ## Ressources pour les étudiants
 
 ## Contenu du dossier
 
-```
+```bash
 hadoop_resources/
 │
 ├── README.md                          ← Ce fichier
